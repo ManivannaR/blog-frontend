@@ -3,13 +3,16 @@ import Header from "../Layouts/Header";
 import Card from "../Components/Card";
 
 const Homepage = ({ setTopic, setID }) => {
-  let api =
-    "https://newsapi.org/v2/everything?q=world&apiKey=3b4a5b86ebb64977b8f2f74d43d21a3c";
+  let api = "https://api.newscatcherapi.com/v2/search?q=india&lang=en";
 
   const [articles, setArticles] = useState([]);
 
   const getArticles = async () => {
-    const response = await fetch(api);
+    const response = await fetch(api, {
+      headers: {
+        "x-api-key": "nkpCIVtWK5kT9WGreA5-MV-GwKR0o-7t-XMGZkAqVO0",
+      },
+    });
     const data = await response.json();
     setArticles(data.articles);
   };
@@ -26,13 +29,11 @@ const Homepage = ({ setTopic, setID }) => {
             return (
               <Card
                 key={Date.now() * Math.random()}
-                url={obj.url}
-                author={obj.author}
+                url={obj.link}
                 content={obj.content}
-                description={obj.description}
-                publishedAt={obj.publishedAt}
+                description={obj.excerpt}
                 title={obj.title}
-                img={obj.urlToImage}
+                img={obj.media}
                 setID={setID}
               />
             );
