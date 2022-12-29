@@ -11,6 +11,10 @@ const Header = ({ setTopic }) => {
     navigate("/articles");
   };
 
+  const handlePosts = () => {
+    navigate("/posts");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -35,10 +39,8 @@ const Header = ({ setTopic }) => {
                 Home
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/posts">
-                Your Posts
-              </a>
+            <li className="nav-item" onClick={handlePosts}>
+              <a className="nav-link">Your Posts</a>
             </li>
           </ul>
           <form className="d-flex" role="search">
