@@ -6,11 +6,15 @@ const YourPosts = ({ setTopic, setID }) => {
   let api = "https://blog-embifi.onrender.com/post";
 
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(
+    "Please wait, your posts are loading."
+  );
 
   const getArticles = async () => {
     const response = await fetch(api);
     const data = await response.json();
     setArticles(data.data);
+    setLoading("");
   };
 
   function base64ArrayBuffer(arrayBuffer) {
@@ -66,6 +70,7 @@ const YourPosts = ({ setTopic, setID }) => {
       <Header setTopic={setTopic} />
       <div className="container-fluid">
         <div className="row">
+          <p>{loading}</p>
           {articles.map((obj) => {
             const base64String = base64ArrayBuffer(obj.image.data.data);
             return (
