@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Layouts/Header";
+import Header3 from "../Layouts/Header3";
 import Card from "../Components/Card";
+import LoginRedirect from "../Pages/LoginRedirect";
 
 const YourPosts = ({ setTopic, setID }) => {
-  let api = "https://blog-embifi.onrender.com/post";
-
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(
     "Please wait, your posts are loading."
   );
-
-  const getArticles = async () => {
-    const response = await fetch(api);
-    const data = await response.json();
-    setArticles(data.data);
-    setLoading("");
-  };
+  let token = localStorage.getItem("token");
 
   function base64ArrayBuffer(arrayBuffer) {
     let base64 = "";
@@ -63,32 +56,57 @@ const YourPosts = ({ setTopic, setID }) => {
   }
 
   useEffect(() => {
+    let api = "http://localhost:3001/user/posts";
+    const getArticles = async () => {
+      const response = await fetch(api, {
+        headers: {
+          authorization: token,
+        },
+      });
+      const data = await response.json();
+      if (data.data.length > 0) {
+        setLoading("");
+        setArticles(data.data);
+      } else {
+        setLoading(
+          <p className="h3" style={{ marginTop: "20px", textAlign: "center" }}>
+            Start adding posts.
+          </p>
+        );
+      }
+    };
     getArticles();
   }, []);
   return (
     <>
-      <Header setTopic={setTopic} />
-      <div className="container-fluid">
-        <div className="row">
-          <p>{loading}</p>
-          {articles.map((obj) => {
-            const base64String = base64ArrayBuffer(obj.image.data.data);
-            return (
-              <Card
-                key={obj._id}
-                setID={setID}
-                id={obj._id}
-                author={obj.author}
-                content={obj.content}
-                description={obj.description}
-                publishedAt={obj.publishedAt}
-                title={obj.title}
-                img={`data:image/png;base64,${base64String}`}
-              />
-            );
-          })}
+      {token ? (
+        <div>
+          <Header3 />
+          <div className="container-fluid">
+            <div className="row">
+              <p>{loading}</p>
+              {articles.map((obj) => {
+                const base64String = base64ArrayBuffer(obj.image.data.data);
+                return (
+                  <Card
+                    key={obj._id}
+                    setID={setID}
+                    id={obj._id}
+                    author={obj.author}
+                    content={obj.content}
+                    description={obj.description}
+                    publishedAt={obj.publishedAt}
+                    title={obj.title}
+                    img={`data:image/png;base64,${base64String}`}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <LoginRedirect />
+      )}
     </>
   );
 };

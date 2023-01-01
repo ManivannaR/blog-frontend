@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ setTopic }) => {
+const Header3 = () => {
   const navigate = useNavigate();
-  const [input, setInput] = useState("");
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setTopic(input);
-    navigate("/articles");
-  };
 
   const handlePosts = () => {
     navigate("/posts");
@@ -18,6 +11,10 @@ const Header = ({ setTopic }) => {
   const handleLogout = () => {
     localStorage.setItem("token", "");
     navigate("/login");
+  };
+
+  const handleAddPost = () => {
+    navigate("/add");
   };
 
   return (
@@ -61,18 +58,12 @@ const Header = ({ setTopic }) => {
             </li>
           </ul>
           <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-              }}
-            />
-            <button className="btn btn-outline-success" onClick={handleSearch}>
-              Search
+            <button
+              className="btn btn-outline-success"
+              style={{ marginLeft: "3px" }}
+              onClick={handleAddPost}
+            >
+              Add Post
             </button>
             <button
               className="btn btn-outline-success"
@@ -88,4 +79,4 @@ const Header = ({ setTopic }) => {
   );
 };
 
-export default Header;
+export default Header3;

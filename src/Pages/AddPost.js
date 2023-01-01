@@ -1,12 +1,20 @@
 import React from "react";
-import Header from "../Layouts/Header";
+import Header4 from "../Layouts/Header4";
 import AddForm from "../Components/AddForm";
+import LoginRedirect from "../Pages/LoginRedirect";
 
-const AddPost = ({ setTopic }) => {
+const AddPost = () => {
+  let token = localStorage.getItem("token");
   return (
     <>
-      <Header setTopic={setTopic} />
-      <AddForm />
+      {token ? (
+        <div>
+          <Header4 />
+          <AddForm />
+        </div>
+      ) : (
+        <LoginRedirect />
+      )}
     </>
   );
 };

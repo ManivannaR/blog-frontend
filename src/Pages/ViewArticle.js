@@ -5,18 +5,22 @@ import Article from "../Components/Article";
 const ViewArticle = ({ setTopic, ID }) => {
   const [articleData, setArticleData] = useState({});
   const [string, setString] = useState("");
-
-  const getArticle = async () => {
-    const response = await fetch(`https://blog-embifi.onrender.com/post/${ID}`);
-    const responseData = await response.json();
-    const base64String = base64ArrayBuffer(responseData.data.image.data.data);
-    setString(base64String);
-    setArticleData(responseData.data);
-  };
+  let token = localStorage.getItem("token");
 
   useEffect(() => {
+    const getArticle = async () => {
+      const response = await fetch(`http://localhost:3001/user/posts/${ID}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      const responseData = await response.json();
+      const base64String = base64ArrayBuffer(responseData.data.image.data.data);
+      setString(base64String);
+      setArticleData(responseData.data);
+    };
     getArticle();
-  }, []);
+  }, [ID]);
 
   function base64ArrayBuffer(arrayBuffer) {
     let base64 = "";

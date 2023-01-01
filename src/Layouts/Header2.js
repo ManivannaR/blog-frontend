@@ -1,24 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ setTopic }) => {
+const Header2 = () => {
   const navigate = useNavigate();
-  const [input, setInput] = useState("");
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setTopic(input);
-    navigate("/articles");
-  };
-
-  const handlePosts = () => {
-    navigate("/posts");
-  };
-
-  const handleLogout = () => {
-    localStorage.setItem("token", "");
-    navigate("/login");
-  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -56,30 +40,25 @@ const Header = ({ setTopic }) => {
                 Home
               </a>
             </li>
-            <li className="nav-item" onClick={handlePosts}>
-              <a className="nav-link">Your Posts</a>
-            </li>
           </ul>
           <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
+            <button
+              className="btn btn-outline-success"
+              style={{ marginLeft: "3px" }}
+              onClick={() => {
+                navigate("/login");
               }}
-            />
-            <button className="btn btn-outline-success" onClick={handleSearch}>
-              Search
+            >
+              Login
             </button>
             <button
               className="btn btn-outline-success"
               style={{ marginLeft: "3px" }}
-              onClick={handleLogout}
+              onClick={() => {
+                navigate("/register");
+              }}
             >
-              Logout
+              Register
             </button>
           </form>
         </div>
@@ -88,4 +67,4 @@ const Header = ({ setTopic }) => {
   );
 };
 
-export default Header;
+export default Header2;

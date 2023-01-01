@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Homepage from "./Pages/Homepage";
-import SearchArticle from "./Pages/SearchArticle";
-import AddPost from "./Pages/AddPost";
-import YourPosts from "./Pages/YourPosts";
-import ViewArticle from "./Pages/ViewArticle";
+import {
+  Homepage,
+  SearchArticle,
+  AddPost,
+  YourPosts,
+  ViewArticle,
+  SignUp,
+  SignIn,
+  LoginRedirect,
+} from "./Pages/index";
 
 function App() {
   const [topic, setTopic] = useState("");
@@ -13,6 +18,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/reir" element={<LoginRedirect />} />
           <Route
             path="/"
             element={<Homepage setTopic={setTopic} setID={setID} />}
