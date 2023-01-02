@@ -10,12 +10,12 @@ const Article = ({ content, date, name, title, desription, image, email }) => {
             <img src={image} className="img-fluid" alt="Unavailable" />
             <br />
             <br />
-            <p class="h6">
+            <p class="h5">
               By {name}
-              <span className="h6"> ({date})</span>
+              <span className="h5"> ({date})</span>
             </p>
             <br />
-            <p className="h6" style={{ fontWeight: "400" }}>
+            <p className="h5" style={{ fontWeight: "400" }}>
               {content}
             </p>
           </div>
