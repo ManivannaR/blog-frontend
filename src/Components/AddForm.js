@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AddForm = () => {
   const navigate = useNavigate();
+  let token = useSelector((state) => state.token);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -35,7 +37,6 @@ const AddForm = () => {
   form.append("date", formData.date);
 
   const handleForm = async () => {
-    let token = localStorage.getItem("token");
     const response = await fetch("http://localhost:3001/user/posts", {
       method: "POST",
       body: form,
@@ -44,8 +45,10 @@ const AddForm = () => {
       },
     });
     const data = await response.json();
-    if (data.message === "Post added") {
+    if (data.result === "success") {
       navigate("/posts");
+    } else {
+      alert(data.message);
     }
   };
   return (

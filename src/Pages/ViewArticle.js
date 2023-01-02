@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Layouts/Header";
 import Article from "../Components/Article";
+import { useSelector } from "react-redux";
 
 const ViewArticle = ({ setTopic, ID }) => {
   const [articleData, setArticleData] = useState({});
   const [string, setString] = useState("");
-  let token = localStorage.getItem("token");
+  let token = useSelector((state) => state.token);
 
   useEffect(() => {
     const getArticle = async () => {

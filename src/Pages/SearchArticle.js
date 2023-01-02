@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import Header from "../Layouts/Header";
 import Card from "../Components/Card";
 import LoginRedirect from "../Pages/LoginRedirect";
+import { useSelector } from "react-redux";
 
 const SearchArticle = ({ topic, setTopic }) => {
   const [articles, setArticles] = useState([]);
-  let token = localStorage.getItem("token");
+  let token = useSelector((state) => state.token);
 
   useEffect(() => {
     let api = `https://newsapi.org/v2/everything?q=${topic}&apiKey=3b4a5b86ebb64977b8f2f74d43d21a3c`;

@@ -1,15 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Header4 = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlePosts = () => {
     navigate("/posts");
   };
 
   const handleLogout = () => {
-    localStorage.setItem("token", "");
+    dispatch({
+      type: "LOGOUT",
+    });
     navigate("/login");
   };
 

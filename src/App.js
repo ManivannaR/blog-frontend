@@ -8,7 +8,6 @@ import {
   ViewArticle,
   SignUp,
   SignIn,
-  LoginRedirect,
 } from "./Pages/index";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Routes>
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
-          <Route path="/reir" element={<LoginRedirect />} />
           <Route
             path="/"
             element={<Homepage setTopic={setTopic} setID={setID} />}

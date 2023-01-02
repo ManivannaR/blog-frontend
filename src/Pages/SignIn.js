@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -28,11 +30,20 @@ const SignIn = () => {
       },
     });
     const responseData = await response.json();
-    localStorage.setItem("token", responseData.token);
-    if (responseData.message === "Invalid Email or Password") {
+    if (responseData.result === "error") {
       alert(responseData.message);
     } else {
       alert(responseData.message);
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          token: responseData.token,
+          user: {
+            name: responseData.data.name,
+            email: responseData.data.email,
+          },
+        },
+      });
       navigate("/");
     }
   };

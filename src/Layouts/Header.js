@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Header = ({ setTopic }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [input, setInput] = useState("");
 
   const handleSearch = (e) => {
@@ -16,7 +19,9 @@ const Header = ({ setTopic }) => {
   };
 
   const handleLogout = () => {
-    localStorage.setItem("token", "");
+    dispatch({
+      type: "LOGOUT",
+    });
     navigate("/login");
   };
 

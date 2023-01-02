@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Header3 from "../Layouts/Header3";
 import Card from "../Components/Card";
 import LoginRedirect from "../Pages/LoginRedirect";
+import { useSelector } from "react-redux";
 
 const YourPosts = ({ setTopic, setID }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(
     "Please wait, your posts are loading."
   );
-  let token = localStorage.getItem("token");
+  let token = useSelector((state) => state.token);
 
   function base64ArrayBuffer(arrayBuffer) {
     let base64 = "";
