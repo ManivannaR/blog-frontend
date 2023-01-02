@@ -106,13 +106,16 @@ const SignUp = () => {
     } else if (formData.password !== formData.confirmPassword) {
       alert("Password do not match");
     } else {
-      const response = await fetch("http://localhost:3001/users/register", {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://blog-embifi.onrender.com/users/register",
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
       const responseData = await response.json();
       if (responseData.result === "error") {
         alert(responseData.message);

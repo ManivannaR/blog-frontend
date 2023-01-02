@@ -9,7 +9,7 @@ const Homepage = ({ setTopic, setID }) => {
   let [articles, setArticles] = useState([]);
   let [page, setPage] = useState(0);
   let [hasMore, setHasMore] = useState(true);
-  let api = `http://localhost:3001/articles?page=${page}`;
+  let api = `https://blog-embifi.onrender.com/articles?page=${page}`;
   let token = useSelector((state) => state.token);
 
   const fetchMoreArticles = async () => {

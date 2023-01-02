@@ -57,7 +57,7 @@ const YourPosts = ({ setTopic, setID }) => {
   }
 
   useEffect(() => {
-    let api = "http://localhost:3001/user/posts";
+    let api = "https://blog-embifi.onrender.com/user/posts";
     const getArticles = async () => {
       const response = await fetch(api, {
         headers: {

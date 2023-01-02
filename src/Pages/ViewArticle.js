@@ -10,11 +10,14 @@ const ViewArticle = ({ setTopic, ID }) => {
 
   useEffect(() => {
     const getArticle = async () => {
-      const response = await fetch(`http://localhost:3001/user/posts/${ID}`, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const response = await fetch(
+        `https://blog-embifi.onrender.com/user/posts/${ID}`,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       const responseData = await response.json();
       const base64String = base64ArrayBuffer(responseData.data.image.data.data);
       setString(base64String);

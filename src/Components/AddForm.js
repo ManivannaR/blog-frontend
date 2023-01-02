@@ -37,13 +37,16 @@ const AddForm = () => {
   form.append("date", formData.date);
 
   const handleForm = async () => {
-    const response = await fetch("http://localhost:3001/user/posts", {
-      method: "POST",
-      body: form,
-      headers: {
-        authorization: token,
-      },
-    });
+    const response = await fetch(
+      "https://blog-embifi.onrender.com/user/posts",
+      {
+        method: "POST",
+        body: form,
+        headers: {
+          authorization: token,
+        },
+      }
+    );
     const data = await response.json();
     if (data.result === "success") {
       navigate("/posts");

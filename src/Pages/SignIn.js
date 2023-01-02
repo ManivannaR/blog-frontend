@@ -22,13 +22,16 @@ const SignIn = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3001/users/login", {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://blog-embifi.onrender.com/users/login",
+      {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
     const responseData = await response.json();
     if (responseData.result === "error") {
       alert(responseData.message);
