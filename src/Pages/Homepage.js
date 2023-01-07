@@ -34,7 +34,6 @@ const Homepage = ({ setTopic, setID }) => {
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreArticles}
-        hasMore={hasMore}
         loader={<p>Loading...</p>}
       >
         <div className="container-fluid">
